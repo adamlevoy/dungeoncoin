@@ -1,0 +1,13 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import ListBox from "../components/ListBox";
+import "../index.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <BaseHead />
+  <body class="max-w-xs mx-auto">
+    <ListBox client:load />
+  </body>
+</html>

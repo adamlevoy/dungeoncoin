@@ -1,0 +1,47 @@
+---
+import "../index.css";
+import BaseHead from "../components/BaseHead.astro";
+import CoinConverter from "../components/CoinConverter";
+---
+
+<html lang="en">
+  <BaseHead />
+  <body
+    class="h-screen grid grid-rows-[max-content_1fr_max-content] place-items-center bg-slate-800"
+  >
+    <header class="py-4">
+      <img class="w-36 mx-auto" src="/assets/logo.svg" alt="" />
+    </header>
+    <main class="text-center px-4">
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white">
+        Convert Your Coin
+      </h1>
+      <p class="text-white text-md sm:text-xl mt-2">
+        D&D 5e currency converter & weight calculator
+      </p>
+      <div class="mt-8">
+        <CoinConverter client:load />
+      </div>
+    </main>
+    <footer class="py-4 text-white text-xs">
+      <p>
+        Built with <a href="https://astro.build">{Astro.generator}</a> by <a
+          class="text-red-600"
+          href="https://github.com/adamlevoy">@adamlevoy</a
+        >
+      </p>
+    </footer>
+    <style>
+      body {
+        background-image: linear-gradient(
+            hsla(0, 0%, 0%, 0.75),
+            hsla(0, 0%, 0%, 0.75)
+          ),
+          url("/assets/skulls-background.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ListBox from "./ListBox";
 
 const coins = [
@@ -40,13 +40,14 @@ export default function CoinConverter() {
   const [inputAmount_A, setInputAmount_A] = useState(1);
   const [inputAmount_B, setInputAmount_B] = useState(10);
 
+  const inputA = useRef();
+  const inputB = useRef();
+
   function handleSelect_A(selectedCoin) {
-    console.log("🚀 ~ selected_Coin_A:", selectedCoin);
     setSelectedCoin_A(selectedCoin);
   }
 
   function handleSelect_B(selectedCoin) {
-    console.log("🚀 ~ selected_Coin_B:", selectedCoin);
     setSelectedCoin_B(selectedCoin);
   }
 
@@ -91,15 +92,16 @@ export default function CoinConverter() {
   }, [selectedCoin_B, inputAmount_B]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-14">
       {/* COIN A */}
       <div className="relative flex max-w-sm mx-auto justify-center items-center">
         <input
-          className="w-full rounded-md pl-4 border-none focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+          className="relative z-10 w-full rounded-md pl-4 border-none focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
           value={inputAmount_A}
           pattern="/[^a-z ]\*([.0-9])*\d/"
           type="text"
           onChange={(e) => setInputAmount_A(e.target.value)}
+          ref={inputA}
         />
         <div className="absolute right-0">
           <ListBox
@@ -108,23 +110,46 @@ export default function CoinConverter() {
             handleSelected={handleSelect_A}
           />
         </div>
+        {/* weight */}
+        <div className="absolute bg-gray-200 left-4 -bottom-8 w-max py-2 px-2 text-xs rounded-b">
+          <span className="flex items-center">
+            <img src="/assets/scale.svg" alt="" className="w-4 h-4 mr-1" />
+            {`${(inputAmount_A * 0.02).toFixed(2)} lbs / ${(
+              (inputAmount_A * 0.02) /
+              2.205
+            ).toFixed(2)} kilos`}
+          </span>
+        </div>
       </div>
 
       {/* COIN B */}
       <div className="relative flex max-w-sm mx-auto justify-center items-center">
+        {/* amount */}
         <input
-          className="w-full rounded-md pl-4 border-none focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+          className="relative z-10 w-full rounded-md pl-4 border-none focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
           value={inputAmount_B}
           pattern="/[^a-z ]\*([.0-9])*\d/"
           type="text"
           onChange={(e) => setInputAmount_B(e.target.value)}
+          ref={inputB}
         />
+        {/* coin */}
         <div className="absolute right-0">
           <ListBox
             coins={coins}
             selected={selectedCoin_B}
             handleSelected={handleSelect_B}
           />
+        </div>
+        {/* weight */}
+        <div className="absolute bg-gray-200 left-4 -bottom-8 w-max py-2 px-2 text-xs rounded-b">
+          <span className="flex items-center">
+            <img src="/assets/scale.svg" alt="" className="w-4 h-4 mr-1" />
+            {`${(inputAmount_B * 0.02).toFixed(2)} lbs / ${(
+              (inputAmount_B * 0.02) /
+              2.205
+            ).toFixed(2)} kilos`}
+          </span>
         </div>
       </div>
     </div>

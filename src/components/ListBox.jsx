@@ -11,7 +11,7 @@ export default function ListBox({ coins, selected, handleSelected }) {
       {({ open }) => (
         <>
           <div className="relative">
-            <Listbox.Button className="relative cursor-default rounded-md bg-gray-200 font-bold py-2 px-2 text-center focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 sm:text-sm w-[155px]">
+            <Listbox.Button className="relative z-20 cursor-default rounded-md bg-gray-200 font-bold py-2 px-2 text-center focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 sm:text-sm w-[155px]">
               <span className="flex items-center justify-between">
                 <img
                   src={selected.avatar}
@@ -46,7 +46,7 @@ export default function ListBox({ coins, selected, handleSelected }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute w-max z-10 mt-1 max-h-56 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute w-max mt-1 max-h-56 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-30">
                 {coins.map((coin) => (
                   <Listbox.Option
                     key={coin.id}
